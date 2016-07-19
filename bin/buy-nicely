@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
+require './lib/buy_nicely.rb'
 
-puts "Hello World"
+BuyNicely::CLI.new.call

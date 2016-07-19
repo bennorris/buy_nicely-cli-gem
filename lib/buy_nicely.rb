@@ -1,5 +1,2 @@
-require "buy_nicely/version"
-
-module BuyNicely
-  # Your code goes here...
-end
+require_relative "./buy_nicely/version"
+require_relative './cli'
