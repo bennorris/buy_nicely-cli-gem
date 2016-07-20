@@ -1,0 +1,5 @@
+class BuyNicely::EthicalList
+
+
+
+end

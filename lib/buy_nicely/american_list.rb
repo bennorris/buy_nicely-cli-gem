@@ -1,0 +1,3 @@
+class BuyNicely::AmericanList
+
+end
