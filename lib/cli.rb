@@ -72,34 +72,50 @@ end
 
 
 def american_goods
-  while @input != "exit"
-    puts "Excellent! How many different companies would you like to see? 5, 10, or 20? Type exit to leave."
-      answer = nil
-        while answer != "exit"
-          answer = gets.strip.downcase
-          case answer
-          when "5"
-            5.times {puts "American Company"}
-            puts "What would you like to do now? See more, or exit?"
-            @input = gets.chomp
-            answer = "exit" if @input == "exit"
-          when "10"
-            10.times {puts "American Company"}
-            puts "What would you like to do now? See more, or exit?"
-            @input = gets.chomp
-            answer = "exit" if @input == "exit"
-          when "20"
-            20.times {puts "American Company"}
-            puts "What would you like to do now? See more, or exit?"
-            @input = gets.chomp
-            answer = "exit" if @input == "exit"
+  input = nil
+  answer = nil
+  puts "Excellent! How many different companies would you like to see? 5, 10, or 20? Type exit to leave."
+    input = gets.strip.downcase
+      case input
+      when "5"
+        5.times {puts "American Company"}
+        puts "What would you like to do now? See more, or exit?"
+        answer = gets.strip.downcase
+          if answer == "more"
+            american_goods
+          elsif answer == "see more"
+            american_goods
+          elsif answer == "exit"
+            input = "exit"
           end
-        end
+      when "10"
+        10.times {puts "American Company"}
+        puts "What would you like to do now? See more, or exit?"
+        answer = gets.strip.downcase
+          if answer == "more"
+            american_goods
+          elsif answer == "see more"
+            american_goods
+          elsif answer == "exit"
+            input = "exit"
+          end
+      when "20"
+        20.times {puts "American Company"}
+        puts "What would you like to do now? See more, or exit?"
+        answer = gets.strip.downcase
+          if answer == "more"
+            american_goods
+          elsif answer == "see more"
+            american_goods
+          elsif answer == "exit"
+            input = "exit"
+          end
       end
-    end
+  end
+
 
 def see_ya
-  puts "Thanks for stopping by. See you next time"
+  puts "Thanks for stopping by. See you next time."
 end
 
 
