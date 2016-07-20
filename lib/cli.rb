@@ -79,7 +79,7 @@ def american_goods
     input = gets.strip.downcase
       case input
       when "5"
-        american_companies[0..4].each do |company|
+        american_companies.shuffle[0..4].each do |company|
         puts "\n" + "Company: #{company[:name]}\nLocation: #{company[:location]}\nCategory: #{company[:category]}\nLink: #{company[:url]}"
         end
 
