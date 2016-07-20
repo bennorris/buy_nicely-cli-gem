@@ -31,28 +31,58 @@ def ethical_goods
           when "5"
             5.times {puts "Fair Trade Company"}
             puts "What would you like to do now? See more, or exit?"
-            @input = gets.chomp
-            answer = "exit" if @input == "exit"
-            answer = "more" if @input == "see more" || @input == "more"
+            answer = gets.strip.downcase
+            if answer == "more"
+              show_more_ethical
+            elsif answer == "see more"
+              show_more_ethical
+            elsif answer == "exit"
+              @input = "exit"
+            end
           when "10"
             10.times {puts "Fair Trade Company"}
             puts "What would you like to do now? See more, or exit?"
-            @input = gets.chomp
-            answer = "exit" if @input == "exit"
+            answer = gets.strip.downcase
+            if answer == "more"
+              show_more_ethical
+            elsif answer == "see more"
+              show_more_ethical
+            elsif answer == "exit"
+              @input = "exit"
+            end
           when "20"
             20.times {puts "Fair Trade Company"}
             puts "What would you like to do now? See more, or exit?"
-            @input = gets.chomp
-            answer = "exit" if @input == "exit"
+            answer = gets.strip.downcase
+            if answer == "more"
+              show_more_ethical
+            elsif answer == "see more"
+              show_more_ethical
+            elsif answer == "exit"
+              @input = "exit"
+            end
           when "more"
             5.times {puts "Fair Trade Company"}
             puts "What would you like to do now? See more, or exit?"
-            @input = gets.chomp
-            answer = "exit" if @input == "exit"
+            answer = gets.strip.downcase
+            if answer == "more"
+              show_more_ethical
+            elsif answer == "see more"
+              show_more_ethical
+            elsif answer == "exit"
+              @input = "exit"
+            end
           end
         end
       end
     end
+
+def show_more_ethical
+  ethical_goods
+end
+
+
+
 
 def american_goods
   while @input != "exit"
