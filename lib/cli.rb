@@ -2,6 +2,7 @@ class BuyNicely::CLI
 
   def call
     prompt
+
     see_ya
   end
 
@@ -13,6 +14,7 @@ def prompt
   if input == "1"
     ethical_goods
   elsif input == "2"
+    BuyNicely::AmericanList.scraper
     american_goods
   else
     puts "Sorry, I didn't catch that."
@@ -20,6 +22,9 @@ def prompt
   end
 end
 
+def list_ethical_companies
+  @ethical_companies = BuyNicely::EthicalList.all
+end
 
 
 def ethical_goods
@@ -65,22 +70,20 @@ def ethical_goods
 end
 
 
-def show_more_ethical
-  ethical_goods
-end
-
-
-
 
 def american_goods
+  american_companies = BuyNicely::AmericanList.all
   input = nil
   answer = nil
-  puts "Excellent! How many different companies would you like to see? 5, 10, or 20? Type exit to leave."
+  puts "Excellent! How many companies would you like to see? 5, 10, or 20? Type exit to leave."
     input = gets.strip.downcase
       case input
       when "5"
-        5.times {puts "American Company"}
-        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
+        american_companies[0..4].each do |company|
+        puts "\n" + "Company: #{company[:name]}\nLocation: #{company[:location]}\nCategory: #{company[:category]}\nLink: #{company[:url]}"
+        end
+
+        puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
             american_goods
