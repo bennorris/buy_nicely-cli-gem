@@ -79,35 +79,35 @@ def american_goods
       case input
       when "5"
         5.times {puts "American Company"}
-        puts "What would you like to do now? See more, or exit?"
+        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
-          if answer == "more"
+          if answer == "1" || answer == "more" || answer == "see more"
             american_goods
-          elsif answer == "see more"
-            american_goods
-          elsif answer == "exit"
+          elsif answer == "2" || answer == "menu" || answer == "2."
+            prompt
+          elsif answer == "3" || answer == "exit"
             input = "exit"
           end
       when "10"
         10.times {puts "American Company"}
-        puts "What would you like to do now? See more, or exit?"
+        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
-          if answer == "more"
+          if answer == "1" || answer == "more" || answer == "see more"
             american_goods
-          elsif answer == "see more"
-            american_goods
-          elsif answer == "exit"
+          elsif answer == "2" || answer == "menu" || answer == "2."
+            prompt
+          elsif answer == "3" || answer == "exit"
             input = "exit"
           end
       when "20"
         20.times {puts "American Company"}
-        puts "What would you like to do now? See more, or exit?"
+        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
-          if answer == "more"
+          if answer == "1" || answer == "more" || answer == "see more"
             american_goods
-          elsif answer == "see more"
-            american_goods
-          elsif answer == "exit"
+          elsif answer == "2" || answer == "menu" || answer == "2."
+            prompt
+          elsif answer == "3" || answer == "exit"
             input = "exit"
           end
       end
