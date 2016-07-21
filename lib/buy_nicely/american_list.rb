@@ -5,6 +5,8 @@ attr_accessor :name, :url, :category, :location
 @assorted = []
 @womens_clothes = []
 @mens_clothes = []
+@home_goods = []
+@gifts = []
 
 def self.assorted_scraper
   doc = Nokogiri::HTML(open("http://www.acontinuouslean.com/the-american-list/"))
@@ -76,7 +78,55 @@ def self.mens_clothing
   @mens_clothes
 end
 
+def self.home_goods_scraper
+  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/home-and-decor-made-in-usa/"))
+  search = doc.search("div.entry-content")
 
+  companies = search.css('p')
+  links = search.css('p').css("a[target='_blank']")
+
+      companies[1..-1].each do |company|
+        name = company.css('a').text
+        url = company.css("a[target='_blank']")
+
+      h = {
+        :name => name,
+        :url => url
+      }
+
+    @home_goods << h
+  end
+  @home_goods
+end
+
+def self.home_goods
+  @home_goods
+end
+
+def self.gifts_scraper
+  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/gifts-made-in-usa/"))
+  search = doc.search("div.entry-content")
+
+  companies = search.css('p')
+  links = search.css('p').css("a[target='_blank']")
+
+      companies[1..-1].each do |company|
+        name = company.css('a').text
+        url = company.css("a[target='_blank']")
+
+      h = {
+        :name => name,
+        :url => url
+      }
+
+    @gifts << h
+  end
+  @gifts
+end
+
+def self.gifts
+  @gifts
+end
 
 
 
