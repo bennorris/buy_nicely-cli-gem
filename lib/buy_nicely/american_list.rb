@@ -1,12 +1,13 @@
 class BuyNicely::AmericanList
 
-attr_accessor :name, :url, :category, :location
+attr_accessor :name, :url, :category, :location, :established
 
 @assorted = []
 @womens_clothes = []
 @mens_clothes = []
 @home_goods = []
 @gifts = []
+@top_50 = []
 
 def self.assorted_scraper
   doc = Nokogiri::HTML(open("http://www.acontinuouslean.com/the-american-list/"))
@@ -78,6 +79,7 @@ def self.scrape_help(link, array)
   links = search.css('p').css("a[target='_blank']")
 
       companies[1..-1].each do |company|
+
         name = company.css('a').text
         url = company.css("a[target='_blank']")
 
@@ -93,15 +95,38 @@ end
 
 def self.gear_patrol_scraper
   doc = Nokogiri::HTML(open('http://gearpatrol.com/2015/06/30/best-made-in-america-brands/'))
-  binding.pry
-
-  companies = doc.css("div.feature").css("h3:not(.big-center)")
-
-    companies[1..-1].each do |company|
-      name = company.text
-      location = doc.css("div.feature div.description p").css("strong").text #not right yet
 
 
+
+  @name_list = doc.css("div.feature").css("h3:not(.big-center)").collect {|x| x.text}
+  @location_list = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
+    x = x.split(' | ')[0]
+    x.gsub(/(Also Notable)/, '')
+    end
+  @established = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
+    x = x.split(' | ')[1]
+    end
+
+  @location_list.pop
+  @name_list.shift
+
+
+
+  @name_list.zip(@location_list,@established).each do |name, location,date|
+      h = {}
+      h[:name] = name
+      h[:location] = location
+      h[:established] = date
+
+        @top_50 << h
+      end
+    @top_50
+end
+
+
+
+def self.top_50
+  @top_50
 end
 
 

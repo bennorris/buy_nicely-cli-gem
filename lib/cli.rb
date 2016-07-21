@@ -29,6 +29,7 @@ def prompt
     gifts
   when "6"
     BuyNicely::AmericanList.gear_patrol_scraper
+    top_50_list
   when "exit"
     true
   else
@@ -136,6 +137,12 @@ def print_info(product_list)
     end
 end
 
+def top_50_list
+  list = BuyNicely::AmericanList.top_50
+  list.each do |company|
+    puts "Company: #{company[:name]}\nLocation: #{company[:location]}\nMore: #{company[:established]}"
+  end
+end
 
 def see_ya
   puts "Thanks for stopping by. See you next time."
