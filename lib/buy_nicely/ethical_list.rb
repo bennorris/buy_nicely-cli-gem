@@ -11,12 +11,10 @@ def self.women_clothing_scraper
   companies = search.css('p')
   links = search.css('p').css("a[target='_blank']")
 
-      companies.each do |company|
+      companies[1..-1].each do |company|
         name = company.css('a').text
-        company.css("a[target='_blank']")
+        url = company.css("a[target='_blank']")
 
-      # links.each do |link|
-      #   url = link['href']
 
       h = {
         :name => name,

@@ -37,8 +37,8 @@ def ethical_goods
       case input
       when "5"
         womens_clothing.shuffle[0..4].each do |company|
-          binding.pry
-          puts "Company: #{company[:name]}\nWebsite: #{company[:url]}"
+
+          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
         end
 
         puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
