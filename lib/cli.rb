@@ -12,6 +12,7 @@ def prompt
   puts "Hi there. Would you like to check out 1. Ethically made goods or 2. American made goods?"
   input = gets.chomp
   if input == "1"
+    BuyNicely::EthicalList.women_clothing_scraper
     ethical_goods
   elsif input == "2"
     BuyNicely::AmericanList.scraper
@@ -28,13 +29,17 @@ end
 
 
 def ethical_goods
+  womens_clothing = BuyNicely::EthicalList.womens_clothing
   input = nil
   answer = nil
-  puts "Great! How many different companies would you like to see? 5, 10, or 20? Type exit to leave."
+  puts "Great! How many different companies would you like to see? 5 or 10? Type exit to leave."
     input = gets.strip.downcase
       case input
       when "5"
-        5.times {puts "Fair Trade Company"}
+        womens_clothing.shuffle[0..4].each do |company|
+          puts company
+        end
+
         puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
@@ -46,17 +51,6 @@ def ethical_goods
         end
       when "10"
         10.times {puts "Fair Trade Company"}
-        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-            ethical_goods
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-        end
-      when "20"
-        20.times {puts "Fair Trade Company"}
         puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
