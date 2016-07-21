@@ -4,6 +4,7 @@ attr_accessor :name, :url, :category, :location
 
 @assorted = []
 @womens_clothes = []
+@mens_clothes = []
 
 def self.assorted_scraper
   doc = Nokogiri::HTML(open("http://www.acontinuouslean.com/the-american-list/"))
@@ -42,7 +43,6 @@ def self.women_clothing_scraper
       }
 
     @womens_clothes << h
-    #end
   end
   @womens_clothes
 end
@@ -50,5 +50,38 @@ end
 def self.womens_clothing
   @womens_clothes
 end
+
+def self.men_clothing_scraper
+  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/mens-clothing-made-in-usa/"))
+  search = doc.search("div.entry-content")
+
+  companies = search.css('p')
+  links = search.css('p').css("a[target='_blank']")
+
+      companies[1..-1].each do |company|
+        name = company.css('a').text
+        url = company.css("a[target='_blank']")
+
+      h = {
+        :name => name,
+        :url => url
+      }
+
+    @mens_clothes << h
+  end
+  @mens_clothes
+end
+
+def self.mens_clothing
+  @mens_clothes
+end
+
+
+
+
+
+
+
+
 
 end
