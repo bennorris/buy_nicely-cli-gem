@@ -91,8 +91,18 @@ def self.scrape_help(link, array)
     array
 end
 
+def self.gear_patrol_scraper
+  doc = Nokogiri::HTML(open('http://gearpatrol.com/2015/06/30/best-made-in-america-brands/'))
+  binding.pry
+
+  companies = doc.css("div.feature").css("h3:not(.big-center)")
+
+    companies[1..-1].each do |company|
+      name = company.text
+      location = doc.css("div.feature div.description p").css("strong").text #not right yet
 
 
+end
 
 
 end

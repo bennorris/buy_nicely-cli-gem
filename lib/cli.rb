@@ -9,7 +9,7 @@ attr_reader :input
 
 def prompt
   puts "Welcome to the American-made directory. Would you like to check out:"
-  puts "\n" + "1. Assorted Companies\n2. Women's Clothing\n3. Men's Clothing\n4. Home Goods\n5. Gifts"
+  puts "\n" + "1. Assorted Companies\n2. Women's Clothing\n3. Men's Clothing\n4. Home Goods\n5. Gifts\n6. Top 50"
   input = gets.chomp
   case input
   when "1"
@@ -27,6 +27,8 @@ def prompt
   when "5"
     BuyNicely::AmericanList.gifts_scraper
     gifts
+  when "6"
+    BuyNicely::AmericanList.gear_patrol_scraper
   when "exit"
     true
   else
