@@ -74,165 +74,71 @@ def assorted_goods
   end
 
 def women_clothing
-  womens_clothing = BuyNicely::AmericanList.womens_clothing
-  input = nil
-  answer = nil
-  puts "How many different companies would you like to see? 5 or 10? Type exit to leave."
-    input = gets.strip.downcase
-      case input
-      when "5"
-        womens_clothing.shuffle[0..4].each do |company|
-
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-        end
-
-        puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-            women_clothing
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-        end
-      when "10"
-        womens_clothing.shuffle[0..9].each do |company|
-
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-        end
-
-        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-            women_clothing
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-        end
-    end
+  product_list = BuyNicely::AmericanList.womens_clothing
+  print_info(product_list)
 end
 
 def men_clothing
-  mens_clothing = BuyNicely::AmericanList.mens_clothing
-  input = nil
-  answer = nil
-  puts "How many different companies would you like to see? 5 or 10? Type exit to leave."
-    input = gets.strip.downcase
-      case input
-      when "5"
-        mens_clothing.shuffle[0..4].each do |company|
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-        end
-
-        puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-            men_clothing
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-          end
-      when "10"
-        mens_clothing.shuffle[0..9].each do |company|
-
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-          end
-
-        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-            men_clothing
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-          end
-    end
+  product_list = BuyNicely::AmericanList.mens_clothing
+  print_info(product_list)
 end
 
 def home_goods
-  home_goods_list = BuyNicely::AmericanList.home_goods
-  input = nil
-  answer = nil
-  puts "How many different companies would you like to see? 5 or 10? Type exit to leave."
-    input = gets.strip.downcase
-      case input
-      when "5"
-        home_goods_list.shuffle[0..4].each do |company|
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-        end
-
-        puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-            home_goods
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-          end
-      when "10"
-        home_goods_list.shuffle[0..9].each do |company|
-
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-          end
-
-        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-            home_goods
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-          end
-    end
+  product_list = BuyNicely::AmericanList.home_goods
+  print_info(product_list)
 end
 
 def gifts
-  gift_list = BuyNicely::AmericanList.gifts
+  product_list = BuyNicely::AmericanList.gifts
+  print_info(product_list)
+end
+
+
+def print_info(product_list)
+  list = product_list
   input = nil
   answer = nil
   puts "How many different companies would you like to see? 5 or 10? Type exit to leave."
     input = gets.strip.downcase
       case input
       when "5"
-        gift_list.shuffle[0..4].each do |company|
+        list.shuffle[0..4].each do |company|
+
           puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
         end
 
         puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
-            gifts
+            print_info(product_list)
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"
             input = "exit"
-          end
+        end
       when "10"
-        gift_list.shuffle[0..9].each do |company|
+        list.shuffle[0..9].each do |company|
 
           puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-          end
+        end
 
         puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
-            gifts
+            print_info(product_list)
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"
             input = "exit"
-          end
+        end
     end
 end
+
 
 def see_ya
   puts "Thanks for stopping by. See you next time."
 end
+
 
 
 

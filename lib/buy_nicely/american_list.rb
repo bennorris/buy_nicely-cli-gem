@@ -29,24 +29,9 @@ end
 
 
 def self.women_clothing_scraper
-  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/womens-clothing-made-in-usa/"))
-  search = doc.search("div.entry-content")
-
-  companies = search.css('p')
-  links = search.css('p').css("a[target='_blank']")
-
-      companies[1..-1].each do |company|
-        name = company.css('a').text
-        url = company.css("a[target='_blank']")
-
-      h = {
-        :name => name,
-        :url => url
-      }
-
-    @womens_clothes << h
-  end
-  @womens_clothes
+  women_clothing = []
+  scrape_help("http://madeinusachallenge.com/womens-clothing-made-in-usa/", women_clothing)
+  @womens_clothes = women_clothing
 end
 
 def self.womens_clothing
@@ -54,24 +39,9 @@ def self.womens_clothing
 end
 
 def self.men_clothing_scraper
-  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/mens-clothing-made-in-usa/"))
-  search = doc.search("div.entry-content")
-
-  companies = search.css('p')
-  links = search.css('p').css("a[target='_blank']")
-
-      companies[1..-1].each do |company|
-        name = company.css('a').text
-        url = company.css("a[target='_blank']")
-
-      h = {
-        :name => name,
-        :url => url
-      }
-
-    @mens_clothes << h
-  end
-  @mens_clothes
+  mens_clothes = []
+  scrape_help("http://madeinusachallenge.com/mens-clothing-made-in-usa/", mens_clothes)
+  @mens_clothes = mens_clothes
 end
 
 def self.mens_clothing
@@ -79,24 +49,9 @@ def self.mens_clothing
 end
 
 def self.home_goods_scraper
-  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/home-and-decor-made-in-usa/"))
-  search = doc.search("div.entry-content")
-
-  companies = search.css('p')
-  links = search.css('p').css("a[target='_blank']")
-
-      companies[1..-1].each do |company|
-        name = company.css('a').text
-        url = company.css("a[target='_blank']")
-
-      h = {
-        :name => name,
-        :url => url
-      }
-
-    @home_goods << h
-  end
-  @home_goods
+  home_goods = []
+  scrape_help("http://madeinusachallenge.com/home-and-decor-made-in-usa/", home_goods)
+  @home_goods = home_goods
 end
 
 def self.home_goods
@@ -108,22 +63,6 @@ def self.gifts_scraper
   gifts = []
   scrape_help("http://madeinusachallenge.com/gifts-made-in-usa/",gifts)
   @gifts = gifts
-  # search = doc.search("div.entry-content")
-  #
-  # companies = search.css('p')
-  # links = search.css('p').css("a[target='_blank']")
-  #
-  #     companies[1..-1].each do |company|
-  #       name = company.css('a').text
-  #       url = company.css("a[target='_blank']")
-  #
-  #     h = {
-  #       :name => name,
-  #       :url => url
-  #     }
-
-  #   @gifts << h
-  # @gifts
 end
 
 def self.gifts
