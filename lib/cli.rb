@@ -2,34 +2,29 @@ class BuyNicely::CLI
 
   def call
     prompt
-
     see_ya
   end
 
-  attr_reader :input
+attr_reader :input
 
 def prompt
-  puts "Hi there. Would you like to check out 1. Ethically made goods or 2. American made goods?"
+  puts "Welcome to the American-made directory. Would you like to check out:\n1. A random selection of companies\n2. Women's clothing"
   input = gets.chomp
   if input == "1"
-    BuyNicely::EthicalList.women_clothing_scraper
-    ethical_goods
+    BuyNicely::AmericanList.assorted_scraper
+    assorted_goods
   elsif input == "2"
-    BuyNicely::AmericanList.scraper
-    american_goods
+    BuyNicely::AmericanList.women_clothing_scraper
+    women_clothing
   else
     puts "Sorry, I didn't catch that."
     prompt
   end
 end
 
-def list_ethical_companies
-  @ethical_companies = BuyNicely::EthicalList.all
-end
 
-
-def ethical_goods
-  womens_clothing = BuyNicely::EthicalList.womens_clothing
+def women_clothing
+  womens_clothing = BuyNicely::AmericanList.womens_clothing
   input = nil
   answer = nil
   puts "Great! How many different companies would you like to see? 5 or 10? Type exit to leave."
@@ -41,21 +36,26 @@ def ethical_goods
           puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
         end
 
-        puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
+        puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
-            ethical_goods
+            women_clothing
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"
             input = "exit"
         end
       when "10"
-        10.times {puts "Fair Trade Company"}
+      when "5"
+        womens_clothing.shuffle[0..9].each do |company|
+
+          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
+        end
+
         puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
-            ethical_goods
+            women_clothing
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"
@@ -66,36 +66,36 @@ end
 
 
 
-def american_goods
-  american_companies = BuyNicely::AmericanList.all
+def assorted_goods
+  assorted_companies = BuyNicely::AmericanList.assorted
   input = nil
   answer = nil
   puts "Excellent! How many companies would you like to see? 5 or 10? Type exit to leave."
     input = gets.strip.downcase
       case input
       when "5"
-        american_companies.shuffle[0..4].each do |company|
+        assorted_companies.shuffle[0..4].each do |company|
         puts "\n" + "Company: #{company[:name]}\nLocation: #{company[:location]}\nCategory: #{company[:category]}\nLink: #{company[:url]}"
         end
 
         puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
-            american_goods
+            assorted_goods
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"
             input = "exit"
           end
       when "10"
-        american_companies.shuffle[0..9].each do |company|
+        assorted_companies.shuffle[0..9].each do |company|
         puts "\n" + "Company: #{company[:name]}\nLocation: #{company[:location]}\nCategory: #{company[:category]}\nLink: #{company[:url]}"
         end
 
         puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
-            american_goods
+          assorted_goods
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"

@@ -2,9 +2,10 @@ class BuyNicely::AmericanList
 
 attr_accessor :name, :url, :category, :location
 
-@all = []
+@assorted = []
+@womens_clothes = []
 
-def self.scraper
+def self.assorted_scraper
   doc = Nokogiri::HTML(open("http://www.acontinuouslean.com/the-american-list/"))
 
   doc.css("div.brands p").each do |company|
@@ -14,13 +15,40 @@ def self.scraper
       :category => company.text.split(" — ")[2],
       :location => company.text.split(" — ")[1]
     }
-    @all << h
+    @assorted << h
   end
-   @all
+   @assorted
 end
 
-def self.all
-  @all
+def self.assorted
+  @assorted
+end
+
+
+def self.women_clothing_scraper
+  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/womens-clothing-made-in-usa/"))
+  search = doc.search("div.entry-content")
+
+  companies = search.css('p')
+  links = search.css('p').css("a[target='_blank']")
+
+      companies[1..-1].each do |company|
+        name = company.css('a').text
+        url = company.css("a[target='_blank']")
+
+      h = {
+        :name => name,
+        :url => url
+      }
+
+    @womens_clothes << h
+    #end
+  end
+  @womens_clothes
+end
+
+def self.womens_clothing
+  @womens_clothes
 end
 
 end

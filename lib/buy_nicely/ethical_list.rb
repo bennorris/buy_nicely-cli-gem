@@ -15,7 +15,6 @@ def self.women_clothing_scraper
         name = company.css('a').text
         url = company.css("a[target='_blank']")
 
-
       h = {
         :name => name,
         :url => url
