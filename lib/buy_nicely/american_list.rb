@@ -104,7 +104,35 @@ def self.home_goods
 end
 
 def self.gifts_scraper
-  doc = Nokogiri::HTML(open("http://madeinusachallenge.com/gifts-made-in-usa/"))
+  #doc = Nokogiri::HTML(open("http://madeinusachallenge.com/gifts-made-in-usa/"))
+  gifts = []
+  scrape_help("http://madeinusachallenge.com/gifts-made-in-usa/",gifts)
+  @gifts = gifts
+  # search = doc.search("div.entry-content")
+  #
+  # companies = search.css('p')
+  # links = search.css('p').css("a[target='_blank']")
+  #
+  #     companies[1..-1].each do |company|
+  #       name = company.css('a').text
+  #       url = company.css("a[target='_blank']")
+  #
+  #     h = {
+  #       :name => name,
+  #       :url => url
+  #     }
+
+  #   @gifts << h
+  # @gifts
+end
+
+def self.gifts
+  @gifts
+end
+
+
+def self.scrape_help(link, array)
+  doc = Nokogiri::HTML(open(link))
   search = doc.search("div.entry-content")
 
   companies = search.css('p')
@@ -119,16 +147,10 @@ def self.gifts_scraper
         :url => url
       }
 
-    @gifts << h
-  end
-  @gifts
+      array << h
+    end
+    array
 end
-
-def self.gifts
-  @gifts
-end
-
-
 
 
 

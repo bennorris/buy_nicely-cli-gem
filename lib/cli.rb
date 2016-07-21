@@ -8,7 +8,8 @@ class BuyNicely::CLI
 attr_reader :input
 
 def prompt
-  puts "Welcome to the American-made directory. Would you like to check out:\n1. Assorted Companies\n2. Women's Clothing\n3. Men's Clothing\n4. Home Goods\n5. Gifts"
+  puts "Welcome to the American-made directory. Would you like to check out:"
+  puts "\n" + "1. Assorted Companies\n2. Women's Clothing\n3. Men's Clothing\n4. Home Goods\n5. Gifts"
   input = gets.chomp
   case input
   when "1"
