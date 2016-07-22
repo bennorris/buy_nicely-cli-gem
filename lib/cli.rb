@@ -33,20 +33,21 @@ def assorted_goods
       when "10"
         ten_assorted_companies
       when "exit"
+        hard_out
       end
   end
 
 
 def five_assorted_companies
   @assorted_companies.shuffle![0..4].map.with_index(1) do |company,index|
-  puts "\n" + "#{index}. Company: #{company[:name]}\n  Category: #{company[:category]}"
+  puts "\n" + "#{index}. Company: #{company[:name]}\n   Category: #{company[:category]}"
   end
   assorted_companies_prompt(5,4)
 end
 
 def ten_assorted_companies
   @assorted_companies.shuffle![0..9].map.with_index(1) do |company,index|
-  puts "\n" + "#{index}. Company: #{company[:name]}\n  Category: #{company[:category]}"
+  puts "\n" + "#{index}. Company: #{company[:name]}\n   Category: #{company[:category]}"
   end
   assorted_companies_prompt(10,9)
 end
@@ -54,18 +55,20 @@ end
 
 
 def assorted_companies_prompt(companies,index_count)
-  puts "\n" + "-Learn more about a company above by entering its number(1-#{companies})."
+  puts "\n" + "-Learn more about a company above by entering its number(1-#{companies})"
   puts "-See more companies by entering 'more'"
   puts "-Go back to main menu by entering 'menu'"
   puts "-Exit by entering 'exit'"
   answer = gets.strip.downcase
 
-  while companies > 0
-    if answer == companies.to_s
-      puts "Company: #{@assorted_companies[companies - 1][:name]}\nLocation: #{@assorted_companies[companies - 1][:location]}\nWebsite: #{@assorted_companies[companies - 1][:url]} "
+  counter = companies
+
+  while counter > 0
+    if answer == counter.to_s
+      puts "Company: #{@assorted_companies[counter - 1][:name]}\nLocation: #{@assorted_companies[counter - 1][:location]}\nWebsite: #{@assorted_companies[counter - 1][:url]} "
       see_more?(index_count)
     end
-    companies-=1
+    counter-=1
   end
 
   if answer == "more"
@@ -73,12 +76,16 @@ def assorted_companies_prompt(companies,index_count)
   elsif answer == "menu"
     prompt
   elsif answer == "exit"
+    hard_out
+  else
+    puts "Sorry, I didn't get that. You can type 'more', 'menu', 'exit', or the number of the company you're interested in."
+    assorted_companies_prompt(companies, index_count)
   end
 
 end
 
 def see_more?(index)
-    puts "Would you like to 1. Go back 2. See more companies?"
+    puts "\n" + "Would you like to 1. Go back 2. See more companies 3. Main menu 4. Exit"
     input = gets.strip.downcase
     case input
     when "1" || "back"
@@ -92,6 +99,13 @@ def see_more?(index)
       end
     when "2" || "see more"
       assorted_goods
+    when "3" || "menu"
+      prompt
+    when "4" || "exit"
+      hard_out
+    else
+      puts "Sorry, I didn't get that."
+      see_more?(index)
     end
   end
 
@@ -187,7 +201,10 @@ def see_ya
   puts "Thanks for stopping by. See you next time."
 end
 
-
+def hard_out
+  puts "Thanks for stopping by. See you next time."
+  exit
+end
 
 
 end
