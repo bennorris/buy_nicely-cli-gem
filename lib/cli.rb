@@ -141,7 +141,11 @@ def more_brands
   list = BuyNicely::AmericanList.brands
 
   list.each do |company|
-    puts "\n"+"Company: #{company[:name]}\n#{company[:location]}\nCategory: #{company[:category]}"
+    if company[:location].include?("Made in")
+      puts "\n"+"Company: #{company[:name]}\n#{company[:location]}\n#{company[:category]}"
+    else
+      puts "\n"+"Company: #{company[:name]}\nMade in #{company[:location]}\n#{company[:category]}"
+    end
   end
 end
 

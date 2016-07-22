@@ -94,30 +94,59 @@ def self.scrape_help(link, array)
 end
 
 def self.brand_scraper
-  doc = Nokogiri::HTML(open('http://brandnewusa.com/apparel'))
+  brand_scraper_helper("div.labelName1","div.labelCity1","div.labelShortDesc1","div.labelDesc1")
+  brand_scraper_helper("div.labelName2","div.labelCity2","div.labelShortDesc2","div.labelDesc2")
+  brand_scraper_helper("div.labelName3","div.labelCity3","div.labelShortDesc3","div.labelDesc3")
+
+#   doc = Nokogiri::HTML(open('http://brandnewusa.com/apparel'))
+#
+#   @brand_name = doc.css("div.labelName1").collect {|name| name.text}
+#   @location_name = doc.css("div.labelCity1").collect {|location| location.text}
+#   @category_name = doc.css("div.labelCat1").collect {|cat| cat.text}
+#   @long_description_text = doc.css("div.labelDesc1").collect {|desc| desc.text}
+#   @short_description_text = doc.css("div.labelShortDesc1").collect {|desc| desc.text}
+#
+#
+#   @brand_name.zip(@location_name, @category_name, @long_description_text, @short_description_text).each do |name,location,cat,long,short|
+#
+#     h = {
+#       :name => name,
+#       :location => location,
+#       :category => cat,
+#       :long_description => long,
+#       :short_description => short
+#     }
+#
+#     @brands << h
+#   end
+#   @brands
+ end
+
+def self.brand_scraper_helper(div_brand,div_location,div_short,div_long)
+  doc = Nokogiri::HTML(open('http://brandnewusa.com/'))
+
+  @brand_name = doc.css(div_brand).collect {|name| name.text}
+  @location_name = doc.css(div_location).collect {|location| location.text}
+  @category_name = doc.css(div_short).collect {|cat| cat.text}
+  @long_description_text = doc.css(div_long).collect {|desc| desc.text}
 
 
-  @brand_name = doc.css("div.labelName1").collect {|name| name.text}
-  @location_name = doc.css("div.labelCity1").collect {|location| location.text}
-  @category_name = doc.css("div.labelCat1").collect {|cat| cat.text}
-  @long_description_text = doc.css("div.labelDesc1").collect {|desc| desc.text}
-  @short_description_text = doc.css("div.labelShortDesc1").collect {|desc| desc.text}
-
-
-  @brand_name.zip(@location_name, @category_name, @long_description_text, @short_description_text).each do |name,location,cat,long,short|
+  @brand_name.zip(@location_name, @category_name, @long_description_text).each do |name,location,cat,long|
 
     h = {
       :name => name,
       :location => location,
       :category => cat,
       :long_description => long,
-      :short_description => short
     }
 
     @brands << h
   end
   @brands
 end
+
+
+
 
 
 
