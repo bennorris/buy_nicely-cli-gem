@@ -16,9 +16,14 @@ def self.assorted_scraper
     h = {
       :name => company.search("a").text,
       :url => company.search("a").attribute("href").value,
-      :category => company.text.split(" — ")[2],
       :location => company.text.split(" — ")[1]
     }
+    if company.text.split(" — ")[2] == nil || company.text.split(" — ")[2] == "" || company.text.split(" — ")[2] == " "
+      h[:category] = "miscellaneous"
+    else
+      h[:category] = company.text.split(" — ")[2]
+    end
+
     @assorted << h
   end
    @assorted
