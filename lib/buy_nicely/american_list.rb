@@ -78,7 +78,7 @@ def self.scrape_help(link, array)
   companies = search.css('p')
   links = search.css('p').css("a[target='_blank']")
 
-      companies[1..-1].each do |company|
+      companies[2..-1].each do |company|
 
         name = company.css('a').text
         url = company.css("a[target='_blank']")

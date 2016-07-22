@@ -17,33 +17,37 @@ def prompt
   when "1" || "1." || "randomly" || "random"
     BuyNicely::AmericanList.scrape_all_brands
     more_brands
-  
-
-  when "1"
-    BuyNicely::AmericanList.assorted_scraper
-    assorted_goods
   when "2"
-    BuyNicely::AmericanList.women_clothing_scraper
-    women_clothing
-  when "3"
-    BuyNicely::AmericanList.men_clothing_scraper
-    men_clothing
-  when "4"
-    BuyNicely::AmericanList.home_goods_scraper
-    home_goods
-  when "5"
-    BuyNicely::AmericanList.gifts_scraper
-    gifts
-  when "6"
-    BuyNicely::AmericanList.scrape_all_brands
-    more_brands
-  when "exit"
-    true
-  else
-    puts "Sorry, I didn't catch that."
-    prompt
+    category_selector
+
   end
 end
+
+#   when "1"
+#     BuyNicely::AmericanList.assorted_scraper
+#     assorted_goods
+#   when "2"
+#     BuyNicely::AmericanList.women_clothing_scraper
+#     women_clothing
+#   when "3"
+#     BuyNicely::AmericanList.men_clothing_scraper
+#     men_clothing
+#   when "4"
+#     BuyNicely::AmericanList.home_goods_scraper
+#     home_goods
+#   when "5"
+#     BuyNicely::AmericanList.gifts_scraper
+#     gifts
+#   when "6"
+#     BuyNicely::AmericanList.scrape_all_brands
+#     more_brands
+#   when "exit"
+#     true
+#   else
+#     puts "Sorry, I didn't catch that."
+#     prompt
+#   end
+# end
 
 def assorted_goods
   assorted_companies = BuyNicely::AmericanList.assorted
@@ -153,6 +157,29 @@ def more_brands
     else
       puts "\n"+"Company: #{company[:name]}\nMade in #{company[:location]}\nCategory: #{company[:category]}"
     end
+  end
+end
+
+def category_selector
+  puts "Which kind of companies would you like to see?"
+  puts "\n" + "1. Women's Apparel\n2. Men's Apparel\n3. Home Goods\n4. Gifts"
+  input = gets.strip.downcase
+  case input
+  when "1" || "1." || "women" || "women's apparel" || "womens apparel"
+    BuyNicely::AmericanList.women_clothing_scraper
+    women_clothing
+  when "2" || "2." || "men" || "men's apparel" || "mens apparel"
+    BuyNicely::AmericanList.men_clothing_scraper
+    men_clothing
+  when "3" || "3." || "home" || "home goods"
+    BuyNicely::AmericanList.home_goods_scraper
+    home_goods
+  when "4" || "4." || "gifts"
+    BuyNicely::AmericanList.gifts_scraper
+    gifts
+  else
+    puts "Sorry, I didn't catch that."
+    category_selector
   end
 end
 
