@@ -8,10 +8,17 @@ class BuyNicely::CLI
 attr_reader :input
 
 def prompt
-  puts "Welcome to the American-made directory. Would you like to check out:"
-  puts "\n" + "1. Assorted Companies\n2. Women's Clothing\n3. Men's Clothing\n4. Home Goods\n5. Gifts"
-  input = gets.chomp
+  puts "\n"
+  puts "Welcome to the American-made directory. Would you like to search brands:"
+  puts "\n"+"1. Randomly\n2. By Category"
+  input = gets.strip.downcase
   case input
+
+  when "1" || "1." || "randomly" || "random"
+    BuyNicely::AmericanList.scrape_all_brands
+    more_brands
+  
+
   when "1"
     BuyNicely::AmericanList.assorted_scraper
     assorted_goods
