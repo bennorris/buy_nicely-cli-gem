@@ -32,29 +32,27 @@ def assorted_goods
       when "5"
         five_assorted_companies
       when "10"
-        assorted_companies.shuffle[0..9].each do |company|
-        puts "\n" + "Company: #{company[:name]}\nLocation: #{company[:location]}\nCategory: #{company[:category]}\nLink: #{company[:url]}"
-        end
-
-        puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
-        answer = gets.strip.downcase
-          if answer == "1" || answer == "more" || answer == "see more"
-          assorted_goods
-          elsif answer == "2" || answer == "menu" || answer == "2."
-            prompt
-          elsif answer == "3" || answer == "exit"
-            input = "exit"
-          end
+        ten_assorted_companies
+      when "exit"
       end
   end
 
 
 def five_assorted_companies
   @assorted_companies.shuffle![0..4].map.with_index(1) do |company,index|
-  puts "\n" + "#{index}. Company: #{company[:name]}\nCategory: #{company[:category]}"
+  puts "\n" + "#{index}. Company: #{company[:name]}\n  Category: #{company[:category]}"
   end
   assorted_companies_prompt(5,4)
 end
+
+def ten_assorted_companies
+  @assorted_companies.shuffle![0..9].map.with_index(1) do |company,index|
+  puts "\n" + "#{index}. Company: #{company[:name]}\n  Category: #{company[:category]}"
+  end
+  assorted_companies_prompt(10,9)
+end
+
+
 
 def assorted_companies_prompt(companies,index_count)
   puts "\n" + "-Learn more about a company above by entering its number(1-#{companies})."
@@ -91,7 +89,7 @@ def see_more?(index)
       if index == 4
         assorted_companies_prompt(5,4)
       elsif index == 9
-        ten_assorted_companies_prompt
+        assorted_companies_prompt(10,9)
       end
     when "2" || "see more"
       assorted_goods
