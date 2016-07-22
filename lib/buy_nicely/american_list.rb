@@ -1,6 +1,6 @@
 class BuyNicely::AmericanList
 
-attr_accessor :name, :url, :category, :location, :established
+attr_accessor :name, :url, :category, :location, :long_description, :short_description
 
 @assorted = []
 @womens_clothes = []
@@ -95,13 +95,30 @@ end
 
 def self.brand_scraper
   doc = Nokogiri::HTML(open('http://brandnewusa.com/apparel'))
-  binding.pry
-  company__name = doc.css("div.labelName2").text
-  location = doc.css("div.labelCity2").text
-  category = doc.css("div.labelCat1").text
-  long_description = doc.css("div.labelDesc1").text
-  short_description = doc.css("div.labelShortDesc1").text
+
+
+  @brand_name = doc.css("div.labelName1").collect {|name| name.text}
+  @location_name = doc.css("div.labelCity1").collect {|location| location.text}
+  @category_name = doc.css("div.labelCat1").collect {|cat| cat.text}
+  @long_description_text = doc.css("div.labelDesc1").collect {|desc| desc.text}
+  @short_description_text = doc.css("div.labelShortDesc1").collect {|desc| desc.text}
+
+
+  @brand_name.zip(@location_name, @category_name, @long_description_text, @short_description_text).each do |name,location,cat,long,short|
+
+    h = {
+      :name => name,
+      :location => location,
+      :category => cat,
+      :long_description => long,
+      :short_description => short
+    }
+
+    @brands << h
+  end
+  @brands
 end
+
 
 
 

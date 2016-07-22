@@ -28,7 +28,8 @@ def prompt
     BuyNicely::AmericanList.gifts_scraper
     gifts
   when "6"
-    BuyNicely::AmericanList.brand_scraper  
+    BuyNicely::AmericanList.brand_scraper
+    more_brands
   when "exit"
     true
   else
@@ -136,12 +137,13 @@ def print_info(product_list)
     end
 end
 
-# def top_50_list
-#   list = BuyNicely::AmericanList.top_50
-#   list.each do |company|
-#     puts "Company: #{company[:name]}\nLocation: #{company[:location]}\nMore: #{company[:established]}"
-#   end
-# end
+def more_brands
+  list = BuyNicely::AmericanList.brands
+
+  list.each do |company|
+    puts "\n"+"Company: #{company[:name]}\n#{company[:location]}\nCategory: #{company[:category]}"
+  end
+end
 
 
 def see_ya
