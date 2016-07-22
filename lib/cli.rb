@@ -173,14 +173,14 @@ def print_info(product_list)
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"
-            input = "exit"
+            hard_out
         end
       when "10"
         list.shuffle[0..9].each do |company|
-
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
+        puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
         end
 
+        puts "\n"
         puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
@@ -188,8 +188,11 @@ def print_info(product_list)
           elsif answer == "2" || answer == "menu" || answer == "2."
             prompt
           elsif answer == "3" || answer == "exit"
-            input = "exit"
-        end
+            hard_out
+          end
+        else
+          puts "Sorry, I didn't get that."
+          print_info(product_list)
     end
 end
 
