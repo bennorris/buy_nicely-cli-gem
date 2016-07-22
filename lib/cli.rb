@@ -5,7 +5,7 @@ class BuyNicely::CLI
     see_ya
   end
 
-attr_reader :input
+#attr_reader :input
 
 def prompt
   puts "\n"
@@ -15,41 +15,14 @@ def prompt
   case input
 
   when "1" || "1." || "randomly" || "random"
-    BuyNicely::AmericanList.scrape_all_brands
-    more_brands
+    assorted_goods
   when "2"
     category_selector
-
   end
 end
 
-#   when "1"
-#     BuyNicely::AmericanList.assorted_scraper
-#     assorted_goods
-#   when "2"
-#     BuyNicely::AmericanList.women_clothing_scraper
-#     women_clothing
-#   when "3"
-#     BuyNicely::AmericanList.men_clothing_scraper
-#     men_clothing
-#   when "4"
-#     BuyNicely::AmericanList.home_goods_scraper
-#     home_goods
-#   when "5"
-#     BuyNicely::AmericanList.gifts_scraper
-#     gifts
-#   when "6"
-#     BuyNicely::AmericanList.scrape_all_brands
-#     more_brands
-#   when "exit"
-#     true
-#   else
-#     puts "Sorry, I didn't catch that."
-#     prompt
-#   end
-# end
-
 def assorted_goods
+  BuyNicely::AmericanList.assorted_scraper
   assorted_companies = BuyNicely::AmericanList.assorted
   input = nil
   answer = nil
@@ -148,15 +121,66 @@ def print_info(product_list)
     end
 end
 
-def more_brands
-  list = BuyNicely::AmericanList.brands
+# @@first_index = 0
+# @@second_index = 4
+#
+# def random_brands
+#   puts "How many companies would you like to see? 5 or 10? Type exit to leave."
+#   BuyNicely::AmericanList.scrape_all_brands
+#   list = BuyNicely::AmericanList.brands
+#   input = gets.strip.downcase
+#   case input
+#   when "5" || "5." || "five"
+#     list[@@first_index..@@second_index].each.with_index(1) do |company,index|
+#
+#         if company[:location].include?("Made in")
+#           puts "\n"+"-- #{index}. #{company[:name]} --\n#{company[:location]}\nCategory: #{company[:category]}"
+#         else
+#           puts "\n"+"-- #{index}. #{company[:name]} --\nMade in #{company[:location]}\nCategory: #{company[:category]}"
+#         end
+#       end
+#       @@first_index += 5
+#       @@second_index +=5
+#
+#     puts "\n" + "If you'd like to learn more about one of the companies above, enter its number (1-5). You can also type 'more' to see more companies, 'menu' to return to the main menu, 'or 'exit' to leave."
+#     answer = gets.strip.downcase
+#
+#     case answer
+#     when "1"
+#       puts "\n" + "#{list[@@first_index][:long_description]}"
+#       see_more?
+#     when "2"
+#       puts "\n" + "#{list[@@first_index + 1][:long_description]}"
+#       see_more?
+#     when "3"
+#       puts "\n" + "#{list[@@first_index + 2][:long_description]}"
+#       see_more?
+#     when "4"
+#       puts "\n" + "#{list[@@first_index + 3][:long_description]}"
+#       see_more?
+#     when "5"
+#       puts "\n" + "#{list[@@first_index + 4][:long_description]}"
+#       see_more?
+#     end
+#
+#   when "10" || "10." || "ten"
+#     list.shuffle[0..9].each.with_index(1) do |company, index|
+#       if company[:location].include?("Made in")
+#         puts "\n"+"-- #{index}. #{company[:name]} --\n#{company[:location]}\nCategory: #{company[:category]}"
+#       else
+#         puts "\n"+"-- #{index}. #{company[:name]} --\nMade in #{company[:location]}\nCategory: #{company[:category]}"
+#       end
+#     end
+#   end
+# end
 
-  list.each do |company|
-    if company[:location].include?("Made in")
-      puts "\n"+"Company: #{company[:name]}\n#{company[:location]}\nCategory: #{company[:category]}"
-    else
-      puts "\n"+"Company: #{company[:name]}\nMade in #{company[:location]}\nCategory: #{company[:category]}"
-    end
+def see_more?
+  puts "Would you like to see more? (Y / N)"
+  input = gets.strip.downcase
+  case input
+  when "y" || "yes"
+    random_brands
+  when "n" || "no"
   end
 end
 

@@ -94,16 +94,22 @@ def self.scrape_help(link, array)
 end
 
 def self.scrape_all_brands
-  brand_scraper("http://www.brandnewusa.com/apparel")
-  brand_scraper("http://www.brandnewusa.com/accessories")
-  brand_scraper("http://www.brandnewusa.com/kitchen")
-  brand_scraper("http://www.brandnewusa.com/home")
-  brand_scraper("http://www.brandnewusa.com/beauty")
-  brand_scraper("http://www.brandnewusa.com/food")
-  brand_scraper("http://www.brandnewusa.com/gear")
-  brand_scraper("http://www.brandnewusa.com/sports")
-  brand_scraper("http://www.brandnewusa.com/kids")
-  brand_scraper("http://www.brandnewusa.com/pets")
+  brand_sites = ["http://www.brandnewusa.com/apparel","http://www.brandnewusa.com/accessories", "http://www.brandnewusa.com/kitchen","http://www.brandnewusa.com/home","http://www.brandnewusa.com/pets"]
+
+# "http://www.brandnewusa.com/kids","http://www.brandnewusa.com/gear","http://www.brandnewusa.com/sports"
+
+  brand_sites.each do |url|
+    brand_scraper(url)
+  end
+  # brand_scraper("http://www.brandnewusa.com/apparel")
+  # brand_scraper("http://www.brandnewusa.com/accessories")
+  # brand_scraper("http://www.brandnewusa.com/kitchen")
+  # brand_scraper("http://www.brandnewusa.com/home")
+  # brand_scraper("http://www.brandnewusa.com/beauty")
+  # brand_scraper("http://www.brandnewusa.com/gear")
+  # brand_scraper("http://www.brandnewusa.com/sports")
+  # brand_scraper("http://www.brandnewusa.com/kids")
+  # brand_scraper("http://www.brandnewusa.com/pets")
 end
 
 def self.brand_scraper(url)
