@@ -9,7 +9,7 @@ class BuyNicely::CLI
 
 def prompt
   puts "\n"
-  puts "Welcome to Domestic Sources, a directory of American-made companies. Would you like to search brands:"
+  puts "Welcome to Domestic Goods, a directory of American-made companies. Would you like to search brands:"
   puts "\n"+"1. Randomly\n2. By Category"
   input = gets.strip.downcase
   case input
