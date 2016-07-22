@@ -9,7 +9,7 @@ attr_reader :input
 
 def prompt
   puts "Welcome to the American-made directory. Would you like to check out:"
-  puts "\n" + "1. Assorted Companies\n2. Women's Clothing\n3. Men's Clothing\n4. Home Goods\n5. Gifts\n6. Top 50"
+  puts "\n" + "1. Assorted Companies\n2. Women's Clothing\n3. Men's Clothing\n4. Home Goods\n5. Gifts"
   input = gets.chomp
   case input
   when "1"
@@ -28,8 +28,7 @@ def prompt
     BuyNicely::AmericanList.gifts_scraper
     gifts
   when "6"
-    BuyNicely::AmericanList.gear_patrol_scraper
-    top_50_list
+    BuyNicely::AmericanList.brand_scraper  
   when "exit"
     true
   else
@@ -137,12 +136,13 @@ def print_info(product_list)
     end
 end
 
-def top_50_list
-  list = BuyNicely::AmericanList.top_50
-  list.each do |company|
-    puts "Company: #{company[:name]}\nLocation: #{company[:location]}\nMore: #{company[:established]}"
-  end
-end
+# def top_50_list
+#   list = BuyNicely::AmericanList.top_50
+#   list.each do |company|
+#     puts "Company: #{company[:name]}\nLocation: #{company[:location]}\nMore: #{company[:established]}"
+#   end
+# end
+
 
 def see_ya
   puts "Thanks for stopping by. See you next time."

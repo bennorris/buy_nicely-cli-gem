@@ -7,7 +7,7 @@ attr_accessor :name, :url, :category, :location, :established
 @mens_clothes = []
 @home_goods = []
 @gifts = []
-@top_50 = []
+@brands = []
 
 def self.assorted_scraper
   doc = Nokogiri::HTML(open("http://www.acontinuouslean.com/the-american-list/"))
@@ -93,40 +93,55 @@ def self.scrape_help(link, array)
     array
 end
 
-def self.gear_patrol_scraper
-  doc = Nokogiri::HTML(open('http://gearpatrol.com/2015/06/30/best-made-in-america-brands/'))
-
-
-
-  @name_list = doc.css("div.feature").css("h3:not(.big-center)").collect {|x| x.text}
-  @location_list = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
-    x = x.split(' | ')[0]
-    x.gsub(/(Also Notable)/, '')
-    end
-  @established = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
-    x = x.split(' | ')[1]
-    end
-
-  @location_list.pop
-  @name_list.shift
-
-
-
-  @name_list.zip(@location_list,@established).each do |name, location,date|
-      h = {}
-      h[:name] = name
-      h[:location] = location
-      h[:established] = date
-
-        @top_50 << h
-      end
-    @top_50
+def self.brand_scraper
+  doc = Nokogiri::HTML(open('http://brandnewusa.com/apparel'))
+  binding.pry
+  company__name = doc.css("div.labelName2").text
+  location = doc.css("div.labelCity2").text
+  category = doc.css("div.labelCat1").text
+  long_description = doc.css("div.labelDesc1").text
+  short_description = doc.css("div.labelShortDesc1").text
 end
 
 
 
-def self.top_50
-  @top_50
+# def self.gear_patrol_scraper
+#   doc = Nokogiri::HTML(open('http://gearpatrol.com/2015/06/30/best-made-in-america-brands/'))
+#
+#
+#
+#   #find 'also notable here' = doc.css('div.feature div.post-content p').text
+#
+#   @name_list = doc.css("div.feature").css("h3:not(.big-center)").collect {|x| x.text}
+#   @location_list = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
+#     x = x.split(' | ')[0]
+#     x.gsub(/(Also Notable)/, '')
+#     end
+#   @established = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
+#     x = x.split(' | ')[1]
+#     end
+#
+#
+#   @location_list.pop
+#   @name_list.shift
+#
+#
+#
+#   @name_list.zip(@location_list,@established).each do |name, location,date|
+#       h = {}
+#       h[:name] = name
+#       h[:location] = location
+#       h[:established] = date
+#
+#         @top_50 << h
+#       end
+#     @top_50
+# end
+
+
+
+def self.brands
+  @brands
 end
 
 
