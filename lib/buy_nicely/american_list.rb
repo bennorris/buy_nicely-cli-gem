@@ -93,37 +93,27 @@ def self.scrape_help(link, array)
     array
 end
 
-def self.brand_scraper
-  brand_scraper_helper("div.labelName1","div.labelCity1","div.labelShortDesc1","div.labelDesc1")
-  brand_scraper_helper("div.labelName2","div.labelCity2","div.labelShortDesc2","div.labelDesc2")
-  brand_scraper_helper("div.labelName3","div.labelCity3","div.labelShortDesc3","div.labelDesc3")
+def self.scrape_all_brands
+  brand_scraper("http://www.brandnewusa.com/apparel")
+  brand_scraper("http://www.brandnewusa.com/accessories")
+  brand_scraper("http://www.brandnewusa.com/kitchen")
+  brand_scraper("http://www.brandnewusa.com/home")
+  brand_scraper("http://www.brandnewusa.com/beauty")
+  brand_scraper("http://www.brandnewusa.com/food")
+  brand_scraper("http://www.brandnewusa.com/gear")
+  brand_scraper("http://www.brandnewusa.com/sports")
+  brand_scraper("http://www.brandnewusa.com/kids")
+  brand_scraper("http://www.brandnewusa.com/pets")
+end
 
-#   doc = Nokogiri::HTML(open('http://brandnewusa.com/apparel'))
-#
-#   @brand_name = doc.css("div.labelName1").collect {|name| name.text}
-#   @location_name = doc.css("div.labelCity1").collect {|location| location.text}
-#   @category_name = doc.css("div.labelCat1").collect {|cat| cat.text}
-#   @long_description_text = doc.css("div.labelDesc1").collect {|desc| desc.text}
-#   @short_description_text = doc.css("div.labelShortDesc1").collect {|desc| desc.text}
-#
-#
-#   @brand_name.zip(@location_name, @category_name, @long_description_text, @short_description_text).each do |name,location,cat,long,short|
-#
-#     h = {
-#       :name => name,
-#       :location => location,
-#       :category => cat,
-#       :long_description => long,
-#       :short_description => short
-#     }
-#
-#     @brands << h
-#   end
-#   @brands
- end
+def self.brand_scraper(url)
+  brand_scraper_helper(url,"div.labelName1","div.labelCity1","div.labelShortDesc1","div.labelDesc1")
+  brand_scraper_helper(url,"div.labelName2","div.labelCity2","div.labelShortDesc2","div.labelDesc2")
+  brand_scraper_helper(url,"div.labelName3","div.labelCity3","div.labelShortDesc3","div.labelDesc3")
+end
 
-def self.brand_scraper_helper(div_brand,div_location,div_short,div_long)
-  doc = Nokogiri::HTML(open('http://brandnewusa.com/'))
+def self.brand_scraper_helper(url,div_brand,div_location,div_short,div_long)
+  doc = Nokogiri::HTML(open(url))
 
   @brand_name = doc.css(div_brand).collect {|name| name.text}
   @location_name = doc.css(div_location).collect {|location| location.text}
@@ -135,56 +125,20 @@ def self.brand_scraper_helper(div_brand,div_location,div_short,div_long)
 
     h = {
       :name => name,
-      :location => location,
       :category => cat,
       :long_description => long,
     }
+
+    if location == "" || location == nil
+      h[:location] = "USA"
+    else
+      h[:location] = location
+    end
 
     @brands << h
   end
   @brands
 end
-
-
-
-
-
-
-
-# def self.gear_patrol_scraper
-#   doc = Nokogiri::HTML(open('http://gearpatrol.com/2015/06/30/best-made-in-america-brands/'))
-#
-#
-#
-#   #find 'also notable here' = doc.css('div.feature div.post-content p').text
-#
-#   @name_list = doc.css("div.feature").css("h3:not(.big-center)").collect {|x| x.text}
-#   @location_list = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
-#     x = x.split(' | ')[0]
-#     x.gsub(/(Also Notable)/, '')
-#     end
-#   @established = doc.css("div.feature").css("div.description").css("strong").text.split('–').collect do |x|
-#     x = x.split(' | ')[1]
-#     end
-#
-#
-#   @location_list.pop
-#   @name_list.shift
-#
-#
-#
-#   @name_list.zip(@location_list,@established).each do |name, location,date|
-#       h = {}
-#       h[:name] = name
-#       h[:location] = location
-#       h[:established] = date
-#
-#         @top_50 << h
-#       end
-#     @top_50
-# end
-
-
 
 def self.brands
   @brands

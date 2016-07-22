@@ -28,7 +28,7 @@ def prompt
     BuyNicely::AmericanList.gifts_scraper
     gifts
   when "6"
-    BuyNicely::AmericanList.brand_scraper
+    BuyNicely::AmericanList.scrape_all_brands
     more_brands
   when "exit"
     true
@@ -142,9 +142,9 @@ def more_brands
 
   list.each do |company|
     if company[:location].include?("Made in")
-      puts "\n"+"Company: #{company[:name]}\n#{company[:location]}\n#{company[:category]}"
+      puts "\n"+"Company: #{company[:name]}\n#{company[:location]}\nCategory: #{company[:category]}"
     else
-      puts "\n"+"Company: #{company[:name]}\nMade in #{company[:location]}\n#{company[:category]}"
+      puts "\n"+"Company: #{company[:name]}\nMade in #{company[:location]}\nCategory: #{company[:category]}"
     end
   end
 end
