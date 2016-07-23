@@ -170,7 +170,7 @@ def print_info(product_list)
       when "5"
         list.shuffle[0..4].each do |company|
 
-          puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
+          puts "\n" + "Company: #{company[:name]}\nDescription: #{company[:description]}\nWebsite: #{company[:url]}"
           end
         puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
@@ -183,7 +183,7 @@ def print_info(product_list)
           end
       when "10"
         list.shuffle[0..9].each do |company|
-        puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
+        puts "\n" + "Company: #{company[:name]}\nDescription: #{company[:description]}\nWebsite: #{company[:url]}"
           end
 
         puts "\n"

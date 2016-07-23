@@ -1,6 +1,6 @@
 class DomesticGoods::AmericanList
 
-attr_accessor :name, :url, :category, :location
+attr_accessor :name, :url, :category, :location, :description
 
 @assorted = []
 @womens_clothes = []
@@ -65,7 +65,6 @@ def self.home_goods
 end
 
 def self.gifts_scraper
-  #doc = Nokogiri::HTML(open("http://madeinusachallenge.com/gifts-made-in-usa/"))
   gifts = []
   scrape_help("http://madeinusachallenge.com/gifts-made-in-usa/",gifts)
   @gifts = gifts
@@ -86,11 +85,23 @@ def self.scrape_help(link, array)
       companies[2..-1].each do |company|
 
         name = company.css('a').text
-        url = company.css("a[target='_blank']")
+        if company.css('a').attribute('href') == nil
+          company.attribute('href').value = "http://madeinusachallenge.com"
+        end
+        url = company.css("a").attribute("href").value
+        description = company.text.split(" – ")[1]
+
+        if description == "" || description == " " || description == nil
+          description = "not provided"
+        end
+        # if url.attribute('href').value == nil
+        #   url.attribute('href').value = "http://madeinusachallenge.com"
+        # end
 
       h = {
         :name => name,
-        :url => url
+        :url => url,
+        :description => description
       }
 
       array << h
