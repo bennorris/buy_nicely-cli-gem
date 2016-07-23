@@ -17,6 +17,11 @@ def prompt
     assorted_goods
   when "2" || "2." || "by category"
     category_selector
+  when "exit"
+    hard_out
+  else
+    puts "Sorry, I didn't catch that. Please enter either 1 or 2."
+    prompt
   end
 end
 
@@ -126,6 +131,8 @@ def see_more?(index)
     when "4" || "4." || "gifts"
       BuyNicely::AmericanList.gifts_scraper
       gifts
+    when "exit"
+      hard_out
     else
       puts "Sorry, I didn't catch that."
       category_selector
@@ -164,8 +171,7 @@ def print_info(product_list)
         list.shuffle[0..4].each do |company|
 
           puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-        end
-
+          end
         puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
           if answer == "1" || answer == "more" || answer == "see more"
@@ -174,11 +180,11 @@ def print_info(product_list)
             prompt
           elsif answer == "3" || answer == "exit"
             hard_out
-        end
+          end
       when "10"
         list.shuffle[0..9].each do |company|
         puts "\n" + "Company: #{company[:name]}\nWebsite: #{company[:url].attribute('href').value}"
-        end
+          end
 
         puts "\n"
         puts "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
@@ -190,6 +196,8 @@ def print_info(product_list)
           elsif answer == "3" || answer == "exit"
             hard_out
           end
+      when "exit"
+        hard_out
         else
           puts "Sorry, I didn't get that."
           print_info(product_list)
