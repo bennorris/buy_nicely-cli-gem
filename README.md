@@ -4,13 +4,13 @@ This Ruby gem provides a CLI to search through American-made companies both rand
 
 ## Installation
 
-  $ gem install buy_nicely
+  `$ gem install domestic_goods`
 
 ## Usage
 
 Enter:
 
-  $ domestic-goods
+  `$ domestic-goods`
 
 and follow the prompts.  
 
