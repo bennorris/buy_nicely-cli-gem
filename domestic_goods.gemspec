@@ -22,15 +22,15 @@ Gem::Specification.new do |spec|
   #   raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   # end
 
-  spec.files         = ["bin/console", "bin/domestic-goods", "bin/setup", "lib/domestic_goods/american_list.rb", "lib/domestic_goods/version.rb", "lib/cli.rb", "lib/domestic_goods.rb"]
+  spec.files         = ["bin/console", "bin/domestic_goods", "bin/setup", "lib/domestic_goods/american_list.rb", "lib/domestic_goods/version.rb", "lib/cli.rb", "lib/domestic_goods.rb"]
   spec.bindir        = "bin"
-  spec.executables   = ["domestic-goods"]
+  spec.executables   = ["domestic_goods"]
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.12"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  
+
 
   spec.add_dependency "nokogiri"
 
