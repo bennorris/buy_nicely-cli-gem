@@ -1,4 +1,4 @@
-class BuyNicely::CLI
+class DomesticGoods::CLI
 
   def call
     prompt
@@ -26,8 +26,8 @@ def prompt
 end
 
 def assorted_goods
-  BuyNicely::AmericanList.assorted_scraper
-  @assorted_companies = BuyNicely::AmericanList.assorted
+  DomesticGoods::AmericanList.assorted_scraper
+  @assorted_companies = DomesticGoods::AmericanList.assorted
   input = nil
   answer = nil
   puts "How many companies would you like to see? 5 or 10? Type exit to leave."
@@ -120,16 +120,16 @@ def see_more?(index)
     input = gets.strip.downcase
     case input
     when "1" || "1." || "women" || "women's apparel" || "womens apparel"
-      BuyNicely::AmericanList.women_clothing_scraper
+      DomesticGoods::AmericanList.women_clothing_scraper
       women_clothing
     when "2" || "2." || "men" || "men's apparel" || "mens apparel"
-      BuyNicely::AmericanList.men_clothing_scraper
+      DomesticGoods::AmericanList.men_clothing_scraper
       men_clothing
     when "3" || "3." || "home" || "home goods"
-      BuyNicely::AmericanList.home_goods_scraper
+      DomesticGoods::AmericanList.home_goods_scraper
       home_goods
     when "4" || "4." || "gifts"
-      BuyNicely::AmericanList.gifts_scraper
+      DomesticGoods::AmericanList.gifts_scraper
       gifts
     when "exit"
       hard_out
@@ -140,22 +140,22 @@ def see_more?(index)
   end
 
 def women_clothing
-  product_list = BuyNicely::AmericanList.womens_clothing
+  product_list = DomesticGoods::AmericanList.womens_clothing
   print_info(product_list)
 end
 
 def men_clothing
-  product_list = BuyNicely::AmericanList.mens_clothing
+  product_list = DomesticGoods::AmericanList.mens_clothing
   print_info(product_list)
 end
 
 def home_goods
-  product_list = BuyNicely::AmericanList.home_goods
+  product_list = DomesticGoods::AmericanList.home_goods
   print_info(product_list)
 end
 
 def gifts
-  product_list = BuyNicely::AmericanList.gifts
+  product_list = DomesticGoods::AmericanList.gifts
   print_info(product_list)
 end
 

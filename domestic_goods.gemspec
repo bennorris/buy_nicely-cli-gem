@@ -1,17 +1,17 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'buy_nicely/version'
+require 'domestic_goods/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "buy_nicely"
-  spec.version       = BuyNicely::VERSION
+  spec.name          = "domestic_goods"
+  spec.version       = DomesticGoods::VERSION
   spec.authors       = ["Ben Norris"]
   spec.email         = ["bennorris07@gmail.com"]
 
-  spec.summary       = %q{A gem to help navigate you toward ethically-made and American-made goods.}
-  spec.description   = %q{A gem to help navigate you toward ethically-made and American-made goods.}
-  spec.homepage      = "https://github.com/bennorris/buy_nicely-cli-gem.git"
+  spec.summary       = %q{A gem to help navigate you toward American-made goods.}
+  spec.description   = %q{A gem to help navigate you toward American-made goods.}
+  spec.homepage      = "https://github.com/bennorris/domestic_goods-cli-gem"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -31,6 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "pry"
-  
+
   spec.add_dependency "nokogiri"
 end

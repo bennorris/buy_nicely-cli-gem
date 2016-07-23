@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe BuyNicely do
+describe DomesticGoods do
   it 'has a version number' do
-    expect(BuyNicely::VERSION).not_to be nil
+    expect(DomesticGoods::VERSION).not_to be nil
   end
 
   it 'does something useful' do

@@ -1,4 +1,4 @@
-class BuyNicely::AmericanList
+class DomesticGoods::AmericanList
 
 attr_accessor :name, :url, :category, :location
 

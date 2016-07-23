@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require './lib/domestic_goods.rb'
+
+DomesticGoods::CLI.new.call
