@@ -10,7 +10,7 @@ This Ruby gem provides a CLI to search through American-made companies both rand
 
 Enter:
 
-  `$ domestic-goods`
+  `$ domestic_goods`
 
 and follow the prompts.  
 
