@@ -2,10 +2,7 @@ class DomesticGoods::CLI
 
   def call
     prompt
-    see_ya
   end
-
-#attr_reader :input
 
 def prompt
   puts "\n"
@@ -120,16 +117,16 @@ def see_more?(index)
     input = gets.strip.downcase
     case input
     when "1" || "1." || "women" || "women's apparel" || "womens apparel"
-      DomesticGoods::AmericanList.women_clothing_scraper
+      DomesticGoods::AmericanList.category_scraper("women")
       women_clothing
     when "2" || "2." || "men" || "men's apparel" || "mens apparel"
-      DomesticGoods::AmericanList.men_clothing_scraper
+      DomesticGoods::AmericanList.category_scraper("men")
       men_clothing
     when "3" || "3." || "home" || "home goods"
-      DomesticGoods::AmericanList.home_goods_scraper
+      DomesticGoods::AmericanList.category_scraper("home")
       home_goods
     when "4" || "4." || "gifts"
-      DomesticGoods::AmericanList.gifts_scraper
+      DomesticGoods::AmericanList.category_scraper("gifts")
       gifts
     when "exit"
       hard_out
@@ -139,23 +136,25 @@ def see_more?(index)
     end
   end
 
+
 def women_clothing
-  product_list = DomesticGoods::AmericanList.womens_clothing
+  product_list = DomesticGoods::AmericanList.lists
+  # product_list = DomesticGoods::AmericanList.womens_clothing
   print_info(product_list)
 end
 
 def men_clothing
-  product_list = DomesticGoods::AmericanList.mens_clothing
+  product_list = DomesticGoods::AmericanList.lists
   print_info(product_list)
 end
 
 def home_goods
-  product_list = DomesticGoods::AmericanList.home_goods
+  product_list = DomesticGoods::AmericanList.lists
   print_info(product_list)
 end
 
 def gifts
-  product_list = DomesticGoods::AmericanList.gifts
+  product_list = DomesticGoods::AmericanList.lists
   print_info(product_list)
 end
 
@@ -204,13 +203,6 @@ def print_info(product_list)
     end
 end
 
-
-
-
-
-def see_ya
-  puts "Thanks for stopping by. See you next time."
-end
 
 def hard_out
   puts "Thanks for stopping by. See you next time."

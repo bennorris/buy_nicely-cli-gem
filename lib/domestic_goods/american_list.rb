@@ -1,32 +1,30 @@
 class DomesticGoods::AmericanList
 
-attr_accessor :name, :url, :category, :location, :description
+@@lists = []
 
-@assorted = []
-@womens_clothes = []
-@mens_clothes = []
-@home_goods = []
-@gifts = []
 
+def self.lists
+  @@lists
+end
+# try to simplify your class variables to be 1 or 2
+# try to simplify your class methods down 3-4 (one that scrapes lists and one that just scrapes info)
 
 def self.assorted_scraper
   doc = Nokogiri::HTML(open("http://www.acontinuouslean.com/the-american-list/"))
 
   doc.css("div.brands p").each do |company|
-    h = {
+    @@lists << DomesticGoods::Company.new({
       :name => company.search("a").text,
       :url => company.search("a").attribute("href").value,
       :location => company.text.split(" — ")[1]
-    }
-    if company.text.split(" — ")[2] == nil || company.text.split(" — ")[2] == "" || company.text.split(" — ")[2] == " "
-      h[:category] = "miscellaneous"
-    else
-      h[:category] = company.text.split(" — ")[2]
-    end
-
-    @assorted << h
+      # if company.text.split(" — ")[2] == nil || company.text.split(" — ")[2] == "" || company.text.split(" — ")[2] == " "
+      #   :category = "miscellaneous"
+      # else
+      #   :category = company.text.split(" — ")[2]
+      # end
+    })
   end
-   @assorted
+  @@lists
 end
 
 def self.assorted
@@ -34,45 +32,63 @@ def self.assorted
 end
 
 
-def self.women_clothing_scraper
-  women_clothing = []
-  scrape_help("http://madeinusachallenge.com/womens-clothing-made-in-usa/", women_clothing)
-  @womens_clothes = women_clothing
+def self.category_scraper(category)
+  @@lists = []
+  case category
+  when "women"
+    scrape_help("http://madeinusachallenge.com/womens-clothing-made-in-usa/", @@lists)
+  when "men"
+    scrape_help("http://madeinusachallenge.com/mens-clothing-made-in-usa/", @@lists)
+  when "home"
+    scrape_help("http://madeinusachallenge.com/home-and-decor-made-in-usa/", @@lists)
+  when "gifts"
+    scrape_help("http://madeinusachallenge.com/gifts-made-in-usa/", @@lists)
+  end
+  @@lists
 end
 
-def self.womens_clothing
-  @womens_clothes
+
+
+
+def self.women_clothing_scraper
+  @@lists = []
+  scrape_help("http://madeinusachallenge.com/womens-clothing-made-in-usa/", @@lists)
+  @@lists
 end
+
+# def self.womens_clothing
+#   @@lists
+# end
 
 def self.men_clothing_scraper
-  mens_clothes = []
-  scrape_help("http://madeinusachallenge.com/mens-clothing-made-in-usa/", mens_clothes)
-  @mens_clothes = mens_clothes
+  @@lists = []
+  scrape_help("http://madeinusachallenge.com/mens-clothing-made-in-usa/", @@lists)
+  @@lists
 end
 
-def self.mens_clothing
-  @mens_clothes
-end
+# def self.mens_clothing
+#   @mens_clothes
+# end
 
 def self.home_goods_scraper
-  home_goods = []
-  scrape_help("http://madeinusachallenge.com/home-and-decor-made-in-usa/", home_goods)
-  @home_goods = home_goods
+  @@lists = []
+  scrape_help("http://madeinusachallenge.com/home-and-decor-made-in-usa/", @@lists)
+  @@lists
 end
 
-def self.home_goods
-  @home_goods
-end
+# def self.home_goods
+#   @home_goods
+# end
 
 def self.gifts_scraper
-  gifts = []
+  @@lists = []
   scrape_help("http://madeinusachallenge.com/gifts-made-in-usa/",gifts)
-  @gifts = gifts
+  @@lists
 end
 
-def self.gifts
-  @gifts
-end
+# def self.gifts
+#   @gifts
+# end
 
 
 def self.scrape_help(link, array)
