@@ -1,3 +1,4 @@
+require 'pry'
 class DomesticGoods::CLI
 
   def call
@@ -118,16 +119,16 @@ def see_more?(index)
     case input
     when "1" || "1." || "women" || "women's apparel" || "womens apparel"
       DomesticGoods::AmericanList.category_scraper("women")
-      women_clothing
+      print_the_list
     when "2" || "2." || "men" || "men's apparel" || "mens apparel"
       DomesticGoods::AmericanList.category_scraper("men")
-      men_clothing
+      print_the_list
     when "3" || "3." || "home" || "home goods"
       DomesticGoods::AmericanList.category_scraper("home")
-      home_goods
+      print_the_list
     when "4" || "4." || "gifts"
       DomesticGoods::AmericanList.category_scraper("gifts")
-      gifts
+      print_the_list
     when "exit"
       hard_out
     else
@@ -136,31 +137,13 @@ def see_more?(index)
     end
   end
 
-
-def women_clothing
-  product_list = DomesticGoods::AmericanList.lists
-  # product_list = DomesticGoods::AmericanList.womens_clothing
-  print_info(product_list)
+def print_the_list
+  print_info(DomesticGoods::AmericanList.lists)
 end
-
-def men_clothing
-  product_list = DomesticGoods::AmericanList.lists
-  print_info(product_list)
-end
-
-def home_goods
-  product_list = DomesticGoods::AmericanList.lists
-  print_info(product_list)
-end
-
-def gifts
-  product_list = DomesticGoods::AmericanList.lists
-  print_info(product_list)
-end
-
 
 def print_info(product_list)
   list = product_list
+  # binding.pry
   input = nil
   answer = nil
   puts "How many different companies would you like to see? 5 or 10? Type exit to leave."
@@ -168,8 +151,9 @@ def print_info(product_list)
       case input
       when "5"
         list.shuffle[0..4].each do |company|
+          puts "\n" + "Company: #{company.name}\nDescription: #{company.description}\nWebsite: #{company.url}"
 
-          puts "\n" + "Company: #{company[:name]}\nDescription: #{company[:description]}\nWebsite: #{company[:url]}"
+          # puts "\n" + "Company: #{company[:name]}\nDescription: #{company[:description]}\nWebsite: #{company[:url]}"
           end
         puts "\n" + "What would you like to do now? 1. See more 2. Go to main menu or 3. exit?"
         answer = gets.strip.downcase
@@ -182,7 +166,10 @@ def print_info(product_list)
           end
       when "10"
         list.shuffle[0..9].each do |company|
-        puts "\n" + "Company: #{company[:name]}\nDescription: #{company[:description]}\nWebsite: #{company[:url]}"
+        puts "\n" + "Company: #{company.name}\nDescription: #{company.description}\nWebsite: #{company.url}"
+
+
+        # puts "\n" + "Company: #{company[:name]}\nDescription: #{company[:description]}\nWebsite: #{company[:url]}"
           end
 
         puts "\n"
