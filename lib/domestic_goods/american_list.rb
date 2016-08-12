@@ -29,19 +29,19 @@ def self.category_scraper(category)
   @@lists = []
   case category
   when "women"
-    scrape_help("http://madeinusachallenge.com/womens-clothing-made-in-usa/", @@lists)
+    scrape_help("http://madeinusachallenge.com/womens-clothing-made-in-usa/")
   when "men"
-    scrape_help("http://madeinusachallenge.com/mens-clothing-made-in-usa/", @@lists)
+    scrape_help("http://madeinusachallenge.com/mens-clothing-made-in-usa/")
   when "home"
-    scrape_help("http://madeinusachallenge.com/home-and-decor-made-in-usa/", @@lists)
+    scrape_help("http://madeinusachallenge.com/home-and-decor-made-in-usa/")
   when "gifts"
-    scrape_help("http://madeinusachallenge.com/gifts-made-in-usa/", @@lists)
+    scrape_help("http://madeinusachallenge.com/gifts-made-in-usa/")
   end
   @@lists
 end
 
 
-def self.scrape_help(link, array)
+def self.scrape_help(link)
   doc = Nokogiri::HTML(open(link))
   search = doc.search("div.entry-content p")
 
