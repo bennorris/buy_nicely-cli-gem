@@ -50,7 +50,7 @@ def self.scrape_help(link)
       company.attribute('href').value = "http://madeinusachallenge.com"
     end
 
-    @@lists << h = DomesticGoods::Company.new({
+    @@lists << DomesticGoods::Company.new({
       :name => company.css('a').text,
       :url => company.css("a").attribute("href").value,
       :description => company.text.split(" – ")[1]

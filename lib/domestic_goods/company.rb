@@ -7,7 +7,11 @@ class DomesticGoods::Company
     @url = attributes[:url]
     @category = attributes[:category]
     @location = attributes[:location]
-    @description = attributes[:description]
+    if attributes.description == "" || attributes.description == " " || attributes.description == nil
+      @description = "not provided"
+    else
+      @description = attributes[:description]
+    end
   end
 
 end
