@@ -1,4 +1,3 @@
-require 'pry'
 class DomesticGoods::CLI
 
   def call
@@ -11,14 +10,14 @@ def prompt
   puts "\n"+"1. Randomly\n2. By Category"
   input = gets.strip.downcase
   case input
-  when "1" || "1." || "randomly" || "random"
+  when "1", "1.", "randomly", "random"
     assorted_goods
-  when "2" || "2." || "by category"
+  when "2", "2.", "by category"
     category_selector
   when "exit"
     hard_out
   else
-    puts "Sorry, I didn't catch that. Please enter either 1 or 2."
+    puts "Sorry, I didn't catch that. Please enter either 1, 2, or exit."
     prompt
   end
 end
@@ -103,11 +102,11 @@ def see_more?(index)
       elsif index == 9
         assorted_companies_prompt(10,9)
       end
-    when "2" || "see more"
+    when "2", "see more"
       assorted_goods
-    when "3" || "menu"
+    when "3", "menu"
       prompt
-    when "4" || "exit"
+    when "4", "exit"
       hard_out
     else
       puts "Sorry, I didn't get that."
@@ -120,16 +119,16 @@ def see_more?(index)
     puts "\n" + "1. Women's Apparel\n2. Men's Apparel\n3. Home Goods\n4. Gifts"
     input = gets.strip.downcase
     case input
-    when "1" || "1." || "women" || "women's apparel" || "womens apparel"
+    when "1", "1.", "women", "women's apparel", "womens apparel"
       DomesticGoods::AmericanList.category_scraper("women")
       print_the_list
-    when "2" || "2." || "men" || "men's apparel" || "mens apparel"
+    when "2", "2.", "men", "men's apparel", "mens apparel"
       DomesticGoods::AmericanList.category_scraper("men")
       print_the_list
-    when "3" || "3." || "home" || "home goods"
+    when "3", "3.", "home", "home goods"
       DomesticGoods::AmericanList.category_scraper("home")
       print_the_list
-    when "4" || "4." || "gifts"
+    when "4", "4.", "gifts"
       DomesticGoods::AmericanList.category_scraper("gifts")
       print_the_list
     when "exit"
